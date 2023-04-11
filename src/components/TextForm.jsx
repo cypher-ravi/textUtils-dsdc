@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // RULE
-export default function TextForm() {
+export default function TextForm(props) {
   const [text, setText] = useState("");
   const [searchValue, setsearchValue] = useState("");
   
@@ -46,11 +46,11 @@ export default function TextForm() {
   const handleWordCount = (e) => {
     const regex =  new RegExp(searchValue,'gi');
     const newstr = text.match(regex);
-    setValue(newstr.length);
+    setValue(newstr.length > 0 ? newstr.length : 0);
   }   
 
   return (
-    <div>
+    <div style={{backgroundColor:props.mode === 'dark'?'black':'white', color:props.mode === 'dark'?'white':'black'}}>
       <div className="mb-3">
         <h1>Enter Your Text Here</h1>
         <textarea
@@ -65,7 +65,7 @@ export default function TextForm() {
         onClick={handleOnUpperCase}
         className="btn btn-outline-primary mx-2"
       >
-        Convert to Uppercase
+        Convert to Upper Case
       </button>
 
       <button
@@ -89,8 +89,8 @@ export default function TextForm() {
 
 {/* <!-- Modal --> */}
         <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div className="modal-dialog">
-            <div className="modal-content">
+          <div className="modal-dialog"  >
+            <div className="modal-content" style={{backgroundColor:props.mode === 'dark'?'black':'white', color:props.mode === 'dark'?'white':'black'}}>
               <div className="modal-header">
                 <h1 className="modal-title fs-5" id="exampleModalLabel">Search a word</h1>
                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
