@@ -26,27 +26,38 @@ export default function TextForm(props) {
       
     });
     setText(temp)
+    props.showAlert('success','All words capitalized!')
   }
 
 
 
 
   const handleOnUpperCase = (event) => {
-    let newText = text.toUpperCase();
-    setText(newText);
+    if(text.length !== 0){
+      let newText = text.toUpperCase();
+      setText(newText);
+      props.showAlert('success','Converted to UpperCase')
+    }else{
+      props.showAlert('danger','Please enter text to process your text')
+    }
+
+   
   };
 
   const handleOnLowerCase = (event) => {
     let newText = text.toLowerCase();
     setText(newText);
+    props.showAlert('success','Converted to LowerCase')
   };
   const handleOnClearText = (event) => {
     setText("");
+    props.showAlert('warning','Text Cleared!')
   };
   const handleWordCount = (e) => {
     const regex =  new RegExp(searchValue,'gi');
     const newstr = text.match(regex);
     setValue(newstr.length > 0 ? newstr.length : 0);
+
   }   
 
   return (
